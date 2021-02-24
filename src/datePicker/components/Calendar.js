@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {View, StyleSheet, Text, Animated} from 'react-native';
 
-import {Header, Days} from '.';
+import {Header, Days} from './index.js';
 import {useCalendar} from '../DatePicker';
 
 const Calendar = () => {
