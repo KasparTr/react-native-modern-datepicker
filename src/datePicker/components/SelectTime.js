@@ -26,15 +26,17 @@ const TimeScroller = ({ title, data, onChange, selectedValue = 0, minuteInterval
 
   useEffect(() => {
     setTimeout(() => {
-      
-    flatListRef.current.scrollToIndex({
-      index: selectedValue, animated: true,
-    })
+      try {
+        flatListRef.current.scrollToIndex({
+          index: selectedValue, animated: true,
+        })
+      } catch(e){}
       active.current = selectedValue * 85
       if (minuteInterval) {
         onChange(selectedValue * minuteInterval);
       } else onChange(selectedValue);
-      }, 400)
+    }
+      , 400)
   },[])
 
   useEffect(() => {
