@@ -8,6 +8,7 @@ import {
   Easing,
   TouchableOpacity,
   I18nManager,
+  Platform
 } from 'react-native';
 
 import {useCalendar} from '../DatePicker';
@@ -110,7 +111,7 @@ const TimeScroller = ({ title, data, onChange, selectedValue = 0, minuteInterval
         snapToInterval={itemSize}
         decelerationRate={'fast'}
         onScroll={Animated.event([{nativeEvent: {contentOffset: {x: scrollAnimatedValue}}}], {
-          useNativeDriver: true,
+            useNativeDriver: Platform.OS === "ios" ? false:  true
         })}
         data={I18nManager.isRTL ? data.reverse() : data}
         onMomentumScrollEnd={() => {
@@ -158,7 +159,7 @@ const SelectTime = () => {
     Animated.timing(openAnimation, {
       toValue: mainState.timeOpen ? 1 : 0,
       duration: 350,
-      useNativeDriver: true,
+       useNativeDriver: !Platform.OS === "ios",
       easing: Easing.bezier(0.17, 0.67, 0.46, 1),
     }).start(() => {
       !mainState.timeOpen && setShow(false);
